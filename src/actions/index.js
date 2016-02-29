@@ -48,7 +48,7 @@ function receiveData(countryKey, data) {
 function fetchData(key) {
   return (dispatch) => {
     dispatch(requestData(key))
-    return fetch(`/data/${key}.topo.json`)
+    return fetch(`../data/${key}.topo.json`)
       .then(response => response.json())
       .then(json => dispatch(receiveData(key, json)));
   };
