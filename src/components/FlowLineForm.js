@@ -27,7 +27,7 @@ export default class FlowLineForm extends Component {
 
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.fromPoint !== this.props.fromPoint || 
+    if (nextProps.fromPoint !== this.props.fromPoint ||
       nextProps.toPoint !== this.props.toPoint) {
       this.setState(nextProps.getFlowValues(nextProps.fromPoint, nextProps.toPoint));
     }
@@ -86,11 +86,14 @@ export default class FlowLineForm extends Component {
       return (
         <div className="FlowLineForm__values">
           <label>&#8593;
-            <input type="number" ref="fromValue" className="FlowLineForm__value" 
+            <input type="number" ref="fromValue" min="0"
+                   className="FlowLineForm__value"
                    value={ this.state.from } onChange={ this.onFromChange } /></label>
           <label>
-            <input type="number" ref="toValue" className="FlowLineForm__value" 
-                   value={ this.state.to } onChange={ this.onToChange } />&#8595;</label>
+            <input type="number" ref="toValue" min="0"
+                   className="FlowLineForm__value"
+                   value={ this.state.to } onChange={ this.onToChange } />
+            &#8595;</label>
         </div>
       );
     } else {

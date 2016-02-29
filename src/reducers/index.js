@@ -66,10 +66,13 @@ export default createReducer(
         points[action.index].properties.selected = false;
         currentPoints.splice(pos, 1);
       } else if (currentPoints.length === 2) {
-        points.forEach((pt) => {
-          pt.properties.selected = false;
+        pos = points.indexOf(currentPoints[1]);
+        points.forEach((pt, index) => {
+          if (index !== pos) {
+            pt.properties.selected = false;
+          }
         });
-        currentPoints = [];
+        currentPoints.shift();
         selectFeature(points, action.index, currentPoints, currentPoints);
       } else if (currentPoints.length < 2) {
         selectFeature(points, action.index, currentPoints, currentPoints);
@@ -96,8 +99,8 @@ export default createReducer(
         flowLinesMap[id1 + '_' + id2] =
         flowLinesMap[id2 + '_' + id1] = flowLines.features.length;
 
-        flowLines = { 
-          ...flowLines, 
+        flowLines = {
+          ...flowLines,
           features: flowLines.features.concat([{
             type: 'Feature',
             properties: {
